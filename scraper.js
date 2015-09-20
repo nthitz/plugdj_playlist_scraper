@@ -27,17 +27,27 @@
     }
     $("body").append(
       "<div id='scraped_playlists_window'>" +
+      "<div id='scraped_playlists_close'>&times;</div>"+
       "<div id='scraped_playlists' style=''>" +
       "<textarea id='scraped_status' rows='20' cols='50'>initalizing</textarea>" +
-      "</div>" +
+      "<div id='scraped_playlists_submit'><input type='button' value='POST to:' id='scraped_playlists_post_button'/>" +
+      "<input type='text' value='http://ks3278471.kimsufi.com:8765/archive' id='scraped_playlists_post_url' />" +
+      "</div></div>" +
       "<style type='text/css'>" +
-      "#scraped_playlists { padding: 2em; position: fixed; width: 400px; height: 200; top: 2em; left: 2em; background-color: rgba(255,255,255, 0.3); cursor: pointer; z-index: 900; }" +
+      "#scraped_playlists_window { padding: 2em; position: fixed; width: 400px; height: 300px; top: 100px; left: 300px; background-color: rgba(255,255,255, 0.3); cursor: pointer; z-index: 900; }" +
       "#scraped_playlists textarea { color: black; font-family: monospace; }" +
+      "#scraped_playlists_submit { display: none; }" +
+      "#scraped_playlists_post_url { width: 300px; }" +
+      "#scraped_playlists_close { position: absolute; top: 0; right: 0; padding: 0 0.5em; font-size: 36px; cursor: pointer; }" +
       "</style>" +
       "</div>")
     statusDOM = $('#scraped_status')
+    $('#scraped_playlists_close').on('click', close)
   }
 
+  function close() {
+    $('#scraped_playlists_window').remove()
+  }
   function scrape() {
     addStatusDOM()
     $.ajax('https://plug.dj/_/playlists', {
@@ -61,6 +71,8 @@
       scrapedLists.push(playlist)
 
       if (playlists.length > 0) {
+        end()
+        return
         setTimeout(function() {
           scrapePlaylist(playlists)
         }, 750)
@@ -75,6 +87,22 @@
     updateStatus(JSON.stringify(
       scrapedLists, null, 2
     ))
+    $('#scraped_playlists_submit').css('display', 'block')
+    $('#scraped_playlists_post_button').on('click', post)
+  }
+  function post() {
+    $('#scraped_playlists_submit').css('display', 'none')
+    var postData = {
+      username: API.getUser().username,
+      room: $('#room-name .bar-value').text(),
+      playlists: scrapedLists
+    }
+    var POST_URL = $('#scraped_playlists_post_url').val()
+    $.ajax(POST_URL, {
+      method: 'POST',
+      data: JSON.stringify(postData),
+      contentType: 'application/json'
+    })
   }
 
   injectJqueryAndRun();
