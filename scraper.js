@@ -30,7 +30,8 @@
       "<div id='scraped_playlists_window'>" +
       "<div id='scraped_playlists_close'>&times;</div>"+
       "<div id='scraped_playlists' style=''>" +
-      "<textarea id='scraped_status' rows='20' cols='50'>initalizing</textarea>" +
+      "Rate limited at 5 seconds per playlist to avoid hitting plug servers too much. you know they cannot afford it.<br />" +
+      "<textarea id='scraped_status' rows='18' cols='50'>initalizing</textarea>" +
       "<div id='scraped_playlists_submit'><input type='button' value='POST to:' id='scraped_playlists_post_button'/>" +
       "<input type='text' value='http://ks3278471.kimsufi.com:8765/archive' id='scraped_playlists_post_url' />" +
       "<br /> PLEASE CONSIDER CLICKING ABOVE BUTTON TO SAVE YOUR DATA TO MY SERVER" +
