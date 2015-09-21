@@ -33,10 +33,11 @@
       "<textarea id='scraped_status' rows='20' cols='50'>initalizing</textarea>" +
       "<div id='scraped_playlists_submit'><input type='button' value='POST to:' id='scraped_playlists_post_button'/>" +
       "<input type='text' value='http://ks3278471.kimsufi.com:8765/archive' id='scraped_playlists_post_url' />" +
-      "<br /> PLEASE CONSIDER CLICKING ABOVE BUTTON TO SAVE YOUR DATA TO MY SERVER</div></div>" +
+      "<br /> PLEASE CONSIDER CLICKING ABOVE BUTTON TO SAVE YOUR DATA TO MY SERVER" +
       "<br /><br />CHROME WILL BLOCK non Secure connections. Click the Sheild in the URL bar to allow nonsecure content temporarily. This will refresh the page then run script again and POST." +
+      "</div></div>" +
       "<style type='text/css'>" +
-      "#scraped_playlists_window { padding: 2em; position: fixed; width: 400px; height: 300px; top: 100px; left: 300px; background-color: rgba(255,255,255, 0.3); cursor: pointer; z-index: 900; }" +
+      "#scraped_playlists_window { padding: 2em; position: fixed; width: 400px; height: 410px; top: 100px; left: 300px; background-color: rgba(255,255,255, 0.3); cursor: pointer; z-index: 900; }" +
       "#scraped_playlists textarea { color: black; font-family: monospace; }" +
       "#scraped_playlists_submit { display: none; }" +
       "#scraped_playlists_post_url { width: 300px; }" +
