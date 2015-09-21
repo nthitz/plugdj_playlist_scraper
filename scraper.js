@@ -34,7 +34,7 @@
       "<div id='scraped_playlists_submit'><input type='button' value='POST to:' id='scraped_playlists_post_button'/>" +
       "<input type='text' value='http://ks3278471.kimsufi.com:8765/archive' id='scraped_playlists_post_url' />" +
       "<br /> PLEASE CONSIDER CLICKING ABOVE BUTTON TO SAVE YOUR DATA TO MY SERVER" +
-      "<br /><br />CHROME WILL BLOCK non Secure connections. Click the Sheild in the URL bar to allow nonsecure content temporarily. This will refresh the page then run script again and POST." +
+      "<br /><br />CHROME WILL BLOCK non Secure connections. Click the Sheild in the URL bar to allow nonsecure content temporarily. This will refresh the page then run script again and POST. _OR_ copy and paste JSON into the POST link" +
       "</div></div>" +
       "<style type='text/css'>" +
       "#scraped_playlists_window { padding: 2em; position: fixed; width: 400px; height: 410px; top: 100px; left: 300px; background-color: rgba(255,255,255, 0.3); cursor: pointer; z-index: 900; }" +
@@ -87,21 +87,23 @@
     })
 
   }
+  var postData =  null
   function end() {
     console.log(scrapedLists)
+    var postData = {
+      username: API.getUser().username,
+      room: $('#room-name .bar-value').text(),
+      playlists: scrapedLists
+    }
     updateStatus(JSON.stringify(
-      scrapedLists, null, 2
+      postData, null, 2
     ))
     $('#scraped_playlists_submit').css('display', 'block')
     $('#scraped_playlists_post_button').on('click', post)
   }
   function post() {
     $('#scraped_playlists_submit').css('display', 'none')
-    var postData = {
-      username: API.getUser().username,
-      room: $('#room-name .bar-value').text(),
-      playlists: scrapedLists
-    }
+
     var POST_URL = $('#scraped_playlists_post_url').val()
     $.ajax(POST_URL, {
       method: 'POST',
