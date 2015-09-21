@@ -54,7 +54,10 @@
       dataType: 'json',
     }).done(function(data) {
       var playlists = data.data;
-      scrapePlaylist(playlists)
+
+      setTimeout(function() {
+        scrapePlaylist(playlists)
+      }, 750)
     })
   }
   function updateStatus(text) {
@@ -71,8 +74,6 @@
       scrapedLists.push(playlist)
 
       if (playlists.length > 0) {
-        end()
-        return
         setTimeout(function() {
           scrapePlaylist(playlists)
         }, 750)
